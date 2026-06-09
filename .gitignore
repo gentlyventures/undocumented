@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+var/
+db.sqlite3
+*.db
+benchmark_history.json
+benchmark_history.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / JS
+node_modules/
+dist/
+.eslintcache
+
+# Logs
+*.log

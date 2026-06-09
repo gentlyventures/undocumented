@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnDocumented | Challenge Documentation & Onboarding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-glow: rgba(139, 92, 246, 0.15);
+            --warning: #f59e0b;
+            --success: #10b981;
+            --cyber-cyan: #06b6d4;
+            --bg-dark: #030712;
+            --bg-panel: rgba(17, 24, 39, 0.7);
+            --border: rgba(255, 255, 255, 0.05);
+            --text-main: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+        }
+        body {
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at top right, rgba(139, 92, 246, 0.08) 0%, #030712 60%),
+                              radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 100% 100%, 24px 24px;
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        header {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 40px;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-badge {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--warning));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 0 15px rgba(217, 119, 6, 0.2);
+        }
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+        .btn {
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--warning));
+            color: white;
+            border: none;
+            box-shadow: 0 0 15px rgba(217, 119, 6, 0.15);
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        .main-layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            gap: 40px;
+        }
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 110px;
+            height: calc(100vh - 150px);
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .sidebar-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: block;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
+        }
+        .sidebar-link:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.02);
+            border-left-color: var(--border);
+        }
+        .sidebar-link.active {
+            color: white;
+            background: rgba(139, 92, 246, 0.06);
+            border-left-color: var(--primary);
+            font-weight: 600;
+        }
+        .content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .doc-section {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+        }
+        .doc-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 8px;
+        }
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: var(--warning);
+        }
+        .badge-cyan {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--cyber-cyan);
+        }
+        .badge-primary {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: var(--primary);
+        }
+        .badge-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--success);
+        }
+        p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        ol, ul {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #ec4899;
+            font-size: 0.85em;
+        }
+        pre {
+            background: rgba(0, 0, 0, 0.3) !important;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        pre code {
+            color: #f3f4f6;
+            background: transparent;
+            padding: 0;
+            font-size: 0.9rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .alert {
+            border-left: 4px solid var(--primary);
+            background: rgba(139, 92, 246, 0.03);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+        .alert-warning {
+            border-left-color: var(--warning);
+            background: rgba(245, 158, 11, 0.03);
+        }
+        .alert-success {
+            border-left-color: var(--success);
+            background: rgba(16, 185, 129, 0.03);
+        }
+        .alert-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(255, 255, 255, 0.02);
+            color: white;
+            font-weight: 600;
+        }
+        .mermaid {
+            background: rgba(0, 0, 0, 0.1) !important;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding-right: 0;
+                margin-bottom: 20px;
+                border-bottom: 1px solid var(--border);
+                padding-bottom: 20px;
+            }
+            .sidebar-menu {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-badge">UD</div>
+            <div class="logo-text">UnDocumented</div>
+        </div>
+        <div class="header-actions">
+            <a href="https://doc.fail" class="btn btn-secondary">Landing Page</a>
+            <a href="https://app.doc.fail" class="btn btn-primary">Enter Judges Portal</a>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        
+        <nav class="sidebar">
+            <div class="sidebar-title">Documentation</div>
+            <ul class="sidebar-menu">
+                <li><a href="#intro" class="sidebar-link active">Introduction</a></li>
+                <li><a href="#quickstart" class="sidebar-link">2-Min Judge Guide</a></li>
+                <li><a href="#pipeline" class="sidebar-link">System Architecture</a></li>
+                <li><a href="#storyboard" class="sidebar-link">Loom Storyboard</a></li>
+                <li><a href="#mcp" class="sidebar-link">MCP Server Guide</a></li>
+                <li><a href="#security" class="sidebar-link">SSO & Security</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            
+            <section id="intro" class="doc-section">
+                <h2>Introduction <span class="badge badge-primary">Track 2 & 3</span></h2>
+                <p>
+                    <strong>UnDocumented</strong> is an autonomous optimization pipeline designed to discover, stress-test, and refactor "undocumented" LLM calls scattered throughout codebases. 
+                </p>
+                <p>
+                    Originally built as an internal utility for Bavl's translation engine and Gently Ventures' workflows, it has been running in production for nearly a year. It has successfully audited over 1,200 files, saving <strong>$35,000+</strong> in API tokens (an 84% cost reduction) and speeding up document assembly pipelines from 120 seconds down to 11.5 seconds (a 10.4x speedup).
+                </p>
+                <div class="alert alert-success">
+                    <div class="alert-title">Google for Startups AI Agents Challenge</div>
+                    UnDocumented directly aligns with <strong>Track 2: Optimize (Existing Agents)</strong> and <strong>Track 3: Refactor (Model migration and orchestration)</strong>. It shows a fully complete product utilizing the google-antigravity ADK SDK, FastMCP tool servers, Google AI Studio Gemini 1.5/2.5 models, and Google Cloud Run.
+                </div>
+            </section>
+
+            <section id="quickstart" class="doc-section">
+                <h2>2-Minute Judge Quick Start Guide <span class="badge badge-warning">Onboarding</span></h2>
+                <p>
+                    Follow these steps to evaluate the live UnDocumented agent platform in under 2 minutes:
+                </p>
+                <ol>
+                    <li>
+                        <strong>Access the App</strong>: Open <a href="https://doc.fail" target="_blank" style="color: var(--primary);">doc.fail</a> and click <strong>"Enter Judges Portal"</strong>.
+                    </li>
+                    <li>
+                        <strong>Authenticate</strong>:
+                        <ul>
+                            <li><strong>In Production</strong>: You are redirected to <code>https://app.doc.fail</code>. Cloudflare Zero Trust SSO is configured. Simply enter your <code>@google.com</code> email to receive a secure one-time OTP code (or log in via Google Workspace Workspace account). No passwords required.</li>
+                            <li><strong>In Local Sandbox / Dev</strong>: Use credentials <code>judges-dft-2026@google.com</code> / <code>bavl-agents-unleashed</code>, or click <strong>"Bypass with Guest Role"</strong>.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Run AST Repository Scan</strong>:
+                        <ul>
+                            <li>Go to the <strong>Repository Scanner</strong> tab.</li>
+                            <li>In the right-hand <strong>"Pre-seeded Mock Repos"</strong> panel, select any competitor repository (e.g. <code>compliance_guard</code> or <code>script_sync</code>).</li>
+                            <li>Click <strong>"Start Codebase Analysis"</strong>.</li>
+                            <li>Review the parsed call sites, extracted prompt templates, and the Google ADK Semantic Scanner recommendations.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Run Optimization Benchmark</strong>:
+                        <ul>
+                            <li>Click the <strong>"Run Strategy Benchmark"</strong> button to trigger the simulation.</li>
+                            <li>Watch the live log feed stream metrics in real time. The engine will compare the Sequential baseline against 6 advanced strategies (Async Concurrency, Stateful Caching, etc.).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Analyze ROI & Refactor</strong>:
+                        <ul>
+                            <li>View the <strong>Performance Analytics</strong> tab. Observe the dynamic SVG charts and cost-speed graphs.</li>
+                            <li>Inspect the generated, production-ready drop-in wrapper code and click <strong>"Export Wrapper"</strong>.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="pipeline" class="doc-section">
+                <h2>System Architecture & Schemas <span class="badge badge-cyan">Technical</span></h2>
+                <p>
+                    UnDocumented uses a 4-stage pipeline that automates the audit-to-refactor lifecycle:
+                </p>
+                
+                <div class="mermaid">
+                    graph TD
+                        A[Codebase Ingestion: Git URL / ZIP / Local Path] --> B[Repository Handler]
+                        B -->|Clean Source Code| C[AST Parser & Code Scanner]
+                        C -->|Extract Imports, Models & Prompt Templates| D[Use Case Extractor]
+                        D -->|Use Case Profiles| E[Synthetic Test Case Generator]
+                        E -->|Test Cases & Messages| F[Multi-Strategy Benchmarking Engine]
+                        F -->|Run Telemetry: Latency, Cost, Tokens| G[Scoring & Optimization Engine]
+                        G -->|Priority: Speed / Cost / Quality| H[Strategy Selection Router]
+                        H -->|Refactor Rules| I[Drop-in Wrapper SDK Code Generator]
+                        H -->|Savings Projections| J[B2B Executive Report Compiler]
+                        I --> K[Client Delivery Package]
+                        J --> K
+                </div>
+
+                <h3>Distributed Worker Pool & Model Cascading</h3>
+                <p>
+                    The queue controller coordinates tasks asynchronously using token-bucket rate limits and semantic caches, routing requests dynamically to <strong>Gemini 1.5 Flash</strong> and escalating to <strong>Gemini 1.5 Pro</strong> when semantic quality checks fail:
+                </p>
+
+                <div class="mermaid">
+                    flowchart TD
+                        A[Inbound LLM Requests] --> B[Task Queue Manager]
+                        B --> C{Cache Lookup}
+                        C -->|Hit| D[Return Cached Result]
+                        C -->|Miss| E[Worker Pool Allocator]
+                        E --> Worker1[Worker Thread 1]
+                        E --> Worker2[Worker Thread 2]
+                        E --> WorkerN[Worker Thread N]
+                        Worker1 & Worker2 & WorkerN --> F[Token Bucket Rate Limiter]
+                        F -->|Check Quota| G[Execute Primary Request: Gemini 1.5 Flash]
+                        G --> H{Quality Check}
+                        H -->|Pass| I[Return Successful Response]
+                        H -->|Fail: Empty/Error/Flagged| J[Escalate to Secondary Model: Gemini 1.5 Pro]
+                        J --> K[Return High-Quality Response]
+                        I & K --> L[Central Key-Value Cache Store]
+                </div>
+
+                <h3>Google Cloud Deployment Topology</h3>
+                <p>
+                    The application is packaged into a unified multi-stage container and deployed to Google Cloud Run, backed by Memorystore Redis and Cloud Storage buckets:
+                </p>
+
+                <div class="mermaid">
+                    graph LR
+                        User[User / CI/CD Pipeline] -->|HTTPS Trigger| APIGateway[Cloud Endpoints / API Gateway]
+                        GeminiEnt[Gemini Enterprise Workspace] -->|Model Context Protocol| CloudRunOrch[Cloud Run Orchestrator]
+                        subgraph GCP Environment
+                            APIGateway -->|Ingress Route| CloudRunOrch
+                            CloudRunOrch -->|Read/Write Artifacts| GCSBucket[(Google Cloud Storage)]
+                            CloudRunOrch -->|Parallel Task Allocation| CloudRunWorkers[Cloud Run Worker Pool]
+                            CloudRunWorkers -->|Cache Sync| RedisCache[(Cloud Memorystore Redis)]
+                        end
+                        CloudRunWorkers -->|Gemini API| GeminiAPI[Google AI Studio: Gemini 1.5 Flash/Pro]
+                        CloudRunWorkers -->|External Call| OpenAI[OpenAI API Endpoint]
+                        CloudRunWorkers -->|External Call| Anthropic[Anthropic API Endpoint]
+                </div>
+            </section>
+
+            <section id="storyboard" class="doc-section">
+                <h2>Walkthrough Video Storyboard & Script <span class="badge badge-success">Presentation</span></h2>
+                <p>
+                    Here is the 2-minute Loom walk-through video script and storyboard planning:
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Time</th>
+                            <th style="width: 40%;">Visual Scene</th>
+                            <th style="width: 40%;">Voiceover Script</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>0:00 - 0:25</strong></td>
+                            <td>Developer looking at a massive OpenAI bill on a screen, and a console showing slow, sequential API calls stalling a background processing loop (120s latency).</td>
+                            <td>"Building autonomous agents is easy, but scaling them for production is a financial and operational nightmare. Developers hardcode expensive models and run API calls in slow, sequential loops, leading to inflated token bills and cascading rate-limit errors. Traditional APM tools can't help because they don't understand AI logic."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>0:25 - 0:50</strong></td>
+                            <td>Dashboard views. Transitions to the Scanner tab. Paste repository path, scan code, and display parsed imports and prompt templates in clean cards.</td>
+                            <td>"Meet UnDocumented, an autonomous optimization pipeline built with Google's Agent Development Kit (ADK). UnDocumented connects to your repository and scans files using AST parsing to locate every undocumented LLM integration, template, and configuration."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>0:50 - 1:25</strong></td>
+                            <td>Screen transitions to the Benchmark Studio. The developer clicks "Ignite Optimization Benchmark". The console logs start streaming in real-time. Gauges show metrics updating live.</td>
+                            <td>"Once discovered, UnDocumented stress-tests your prompts across six enterprise-grade processing strategies—including distributed worker pools, batch API routing, and semantic clustering. Powered by Gemini 1.5 Flash, it benchmarks latency, API costs, and output quality across multiple LLM providers and tiers."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1:25 - 2:00</strong></td>
+                            <td>Performance Analytics tab showing cost, speed, and quality curves. Recommendation suggests switching to Hybrid Model Cascading. Zooms into the generated drop-in wrapper code.</td>
+                            <td>"The analytics dashboard reveals the optimal architecture. By refactoring Gently Ventures' production taxonomy engine to use Hybrid Model Cascading, we reduced API costs by 84% and boosted throughput by 10x with zero quality loss. Optimize your agents today with UnDocumented, and move from prototype to production on Google Cloud."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="mcp" class="doc-section">
+                <h2>Model Context Protocol (MCP) Server Guide <span class="badge badge-primary">Developer</span></h2>
+                <p>
+                    UnDocumented implements an official python FastMCP server. This enables developers to connect codebase optimization tools directly to their IDEs (like Cursor, VS Code, or Claude Code) or mount them directly within Gemini Enterprise.
+                </p>
+                <h3>Exposed MCP Tools</h3>
+                <ul>
+                    <li><code>scan_repository(directory: string)</code>: Scans a local repository directory statically using AST parsing. Returns call sites, prompt structures, and security notices. Whitelisted to prevent system directory traversals.</li>
+                    <li><code>benchmark_codebase(prompts: string[], strategies: string[], providers: string[], tiers: string[])</code>: Runs dynamic latency and cost optimization benchmarks.</li>
+                </ul>
+                <h3>Local MCP Setup</h3>
+                <pre><code># Start the server using stdio transport
+cd UnDocumented/backend
+pip install -r requirements.txt
+python mcp_server.py</code></pre>
+            </section>
+
+            <section id="security" class="doc-section">
+                <h2>SSO & Gated Access Security Policies <span class="badge badge-success">Zero Trust</span></h2>
+                <p>
+                    To secure developer telemetry and client codebases, UnDocumented implements a segmented public-root Zero Trust security architecture:
+                </p>
+                <div class="grid-2">
+                    <div class="glass-panel" style="padding: 20px; border: 1px solid var(--border); margin: 0; background: rgba(255,255,255,0.01);">
+                        <h4 style="margin-top:0; color:var(--primary);">Public Zone (doc.fail)</h4>
+                        <p style="font-size:0.85rem; margin-bottom:0;">
+                            The main marketing landing page (<code>doc.fail</code>) and the public-facing documentation (<code>doc.fail/docs</code>) are publicly accessible to anyone. This ensures judges, developers, and visitors can read submission materials and explore features instantly without signing up.
+                        </p>
+                    </div>
+                    <div class="glass-panel" style="padding: 20px; border: 1px solid var(--border); margin: 0; background: rgba(255,255,255,0.01);">
+                        <h4 style="margin-top:0; color:var(--success);">Gated Zone (app.doc.fail)</h4>
+                        <p style="font-size:0.85rem; margin-bottom:0;">
+                            The actual scanner dashboard, benchmarking studio, and admin settings (<code>app.doc.fail</code>) are protected behind Cloudflare Access. Any request to this subdomain requires email OTP authentication. Pre-seeded rules authorize all <code>@google.com</code> and <code>@gentlyventures.com</code> users.
+                        </p>
+                    </div>
+                </div>
+                <h3>FastAPI JWT & CF-Access Verification</h3>
+                <p>
+                    When a request passes Cloudflare Zero Trust SSO, the backend extracts the validated identity header, checks the SQLite users directory, and auto-provisions profiles:
+                </p>
+                <pre><code class="language-python"># app.py secure JWKS-based JWT assertion verification snippet
+async def verify_cloudflare_jwt(request: Request) -> Optional[str]:
+    """
+    Decodes and verifies the Cloudflare Access JWT token from the headers.
+    Returns the verified email if valid, or None.
+    """
+    token = request.headers.get("Cf-Access-Jwt-Assertion")
+    if not token:
+        # Fallback for local development
+        is_local = request.client and (request.client.host in ("127.0.0.1", "localhost", "::1") or request.client.host.startswith("192.168.") or request.client.host.startswith("10."))
+        bypass_enabled = os.environ.get("BYPASS_CF_JWT", "false").lower() == "true"
+        if is_local or bypass_enabled:
+            return request.headers.get("Cf-Access-Authenticated-User-Email")
+        return None
+
+    team_domain = os.environ.get("CLOUDFLARE_TEAM_DOMAIN")
+    audience = os.environ.get("CLOUDFLARE_AUDIENCE")
+    
+    if not team_domain or not audience:
+        print("CLOUDFLARE_TEAM_DOMAIN or CLOUDFLARE_AUDIENCE env vars not set. Verification bypassed (falling back to headers).")
+        return request.headers.get("Cf-Access-Authenticated-User-Email")
+
+    try:
+        # 1. Fetch JWKS keys
+        certs = await get_cloudflare_certs(team_domain)
+        
+        # 2. Extract JWT Header to get Key ID (kid)
+        headers = jwt.get_unverified_header(token)
+        kid = headers.get("kid")
+        if not kid:
+            print("JWT token missing 'kid' in header")
+            return None
+            
+        # 3. Find matching public key certificate
+        public_key = None
+        keys = certs.get("keys", [])
+        for key in keys:
+            if key.get("kid") == kid:
+                from jwt.algorithms import RSAAlgorithm
+                public_key = RSAAlgorithm.from_jwk(key)
+                break
+                
+        if not public_key:
+            print(f"Could not find public key certificate matching kid: {kid}")
+            return None
+            
+        # 4. Decode and verify token
+        issuer = f"https://{team_domain}.cloudflareaccess.com"
+        payload = jwt.decode(
+            token,
+            public_key,
+            algorithms=["RS256"],
+            audience=audience,
+            issuer=issuer
+        )
+        return payload.get("email")
+    except Exception as e:
+        print(f"Cloudflare JWT verification failed: {e}")
+        return None
+
+@app.get("/api/auth/cf-session")
+async def cf_session(request: Request):
+    email = await verify_cloudflare_jwt(request)
+    if not email:
+        return {"status": "no_cf_session"}
+    
+    row = None
+    with db_transaction(write=False) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, email, name, role, status FROM users WHERE email = ?", (email,))
+        row = cursor.fetchone()
+    
+    if row:
+        user_id, email, name, role, status = row
+        if status == "suspended":
+            raise HTTPException(status_code=403, detail="Your account has been suspended.")
+        return {
+            "status": "success",
+            "user": {
+                "id": user_id,
+                "email": email,
+                "name": name,
+                "role": role,
+                "status": status,
+                "token": f"cf_session_{user_id}_{int(time.time())}"
+            }
+        }
+    ...
+    return {"status": "success", "user": user_profile}</code></pre>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'dark',
+            themeVariables: {
+                background: '#090d16',
+                primaryColor: '#8b5cf6',
+                primaryTextColor: '#fff',
+                lineColor: '#38bdf8',
+                textColor: '#9ca3af'
+            }
+        });
+    </script>
+    <script>
+        // Smooth scroll active sidebar navigation
+        const links = document.querySelectorAll('.sidebar-link');
+        const sections = document.querySelectorAll('.doc-section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
