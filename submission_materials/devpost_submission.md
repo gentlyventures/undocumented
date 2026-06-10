@@ -89,7 +89,7 @@ Benchmarking our six strategies against the sequential baseline (~120s):
 
 ### Q5: If you could add one specific API capability or integration that would have saved you 2+ hours of work, what would it be? *
 **Answer:**
-**A standardized EventSource / SSE POST stream helper in the Google AI SDK client-side.** This would eliminate the need for manual, low-level stream reader byte-decoding, chunk splitting, and event parser routines to stream logs from uvicorn background processes to React dashboards.
+A client-side SSE/EventSource POST stream helper in Google AI SDK. This eliminates manual ReadableStream byte-decoding, chunk splitting, and event-parsing to stream background process logs to React dashboards.
 
 ### Q6: If you have any additional information on your project, please include it here.
 **Answer:**
